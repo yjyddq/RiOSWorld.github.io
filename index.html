@@ -118,6 +118,27 @@
       overflow-x: auto;
       margin: 20px 0;
     }
+
+    .benchmark-comparison {
+      width: 100%;
+      table-layout: fixed;
+      display: table;
+      border-collapse: collapse;
+    }
+  
+    .benchmark-comparison th {
+      padding: 4px 2px;
+      font-size: 0.9em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 6%; /* 默认每列宽度 */
+    }
+  
+    /* 为较长名称的工具提供更多空间 */
+    .benchmark-comparison th.wide {
+      width: 8%;
+  }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -475,8 +496,7 @@
                   <table class="table is-hoverable is-striped"
                     style="margin: 0 auto; background-color: rgba(0,0,0,0); width:600px; text-align: center;">
                     <thead style="text-align: center;">
-                      <tr>
-                        <th style="border: 0">&nbsp;</th>
+                      <tr class="benchmark-comparison">
                         <th style="width: 33%"><a href="https://github.com/ryoungj/toolemu?tab=readme-ov-file" target="_blank">ToolEmu</a>
                         </th>
                         <th style="width: 33%"><a href="https://github.com/uiuc-kang-lab/InjecAgent" target="_blank">InjecAgent</a>
