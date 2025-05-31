@@ -118,27 +118,6 @@
       overflow-x: auto;
       margin: 20px 0;
     }
-
-    .benchmark-comparison {
-      width: 100%;
-      table-layout: fixed;
-      display: table;
-      border-collapse: collapse;
-    }
-  
-    .benchmark-comparison th {
-      padding: 4px 2px;
-      font-size: 0.9em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 6%; /* 默认每列宽度 */
-    }
-  
-    /* 为较长名称的工具提供更多空间 */
-    .benchmark-comparison th.wide {
-      width: 8%;
-  }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -496,38 +475,38 @@
                   <table class="table is-hoverable is-striped"
                     style="margin: 0 auto; background-color: rgba(0,0,0,0); width:600px; text-align: center;">
                     <thead style="text-align: center;">
-                      <tr class="benchmark-comparison">
-                        <th><a href="https://github.com/ryoungj/toolemu?tab=readme-ov-file" target="_blank">ToolEmu</a>
+                      <tr>
+                        <th style="width: 33%"><a href="https://github.com/ryoungj/toolemu?tab=readme-ov-file" target="_blank">ToolEmu</a>
                         </th>
-                        <th><a href="https://github.com/uiuc-kang-lab/InjecAgent" target="_blank">InjecAgent</a>
+                        <th style="width: 33%"><a href="https://github.com/uiuc-kang-lab/InjecAgent" target="_blank">InjecAgent</a>
                         </th>
-                        <th><a href="https://github.com/Junjie-Ye/ToolSword" target="_blank">ToolSword</a>
+                        <th style="width: 33%"><a href="https://github.com/Junjie-Ye/ToolSword" target="_blank">ToolSword</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/Lordog/R-Judge" target="_blank">R-Judge</a>
+                        <th style="width: 43%"><a href="https://github.com/Lordog/R-Judge" target="_blank">R-Judge</a>
                         </th>
-                        <th><a href="https://huggingface.co/datasets/ai-safety-institute/AgentHarm" target="_blank">AgentHarm</a>
+                        <th style="width: 33%"><a href="https://huggingface.co/datasets/ai-safety-institute/AgentHarm" target="_blank">AgentHarm</a>
                         </th>
-                        <th><a href="https://github.com/agiresearch/ASB" target="_blank">ASB</a>
+                        <th style="width: 33%"><a href="https://github.com/agiresearch/ASB" target="_blank">ASB</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/thu-coai/Agent-SafetyBench/" target="_blank">Agent-SafetyBench</a>
+                        <th style="width: 73%"><a href="https://github.com/thu-coai/Agent-SafetyBench/" target="_blank">Agent-SafetyBench</a>
                         </th>
-                        <th><a href="https://agentdojo.spylab.ai/" target="_blank">AgentDojo</a>
+                        <th style="width: 33%"><a href="https://agentdojo.spylab.ai/" target="_blank">AgentDojo</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/xbmxb/EnvDistraction" target="_blank">Env. Distraction</a>
+                        <th style="width: 73%"><a href="https://github.com/xbmxb/EnvDistraction" target="_blank">Env. Distraction</a>
                         </th>
-                        <th><a href="https://safearena.github.io/" target="_blank">SafeArena</a>
+                        <th style="width: 33%"><a href="https://safearena.github.io/" target="_blank">SafeArena</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/segev-shlomov/ST-WebAgentBench" target="_blank">ST-WebAgentBench</a>
+                        <th style="width: 73%"><a href="https://github.com/segev-shlomov/ST-WebAgentBench" target="_blank">ST-WebAgentBench</a>
                         </th>
-                        <th class="wide"><a href="https://mobilesafetybench.github.io/" target="_blank">MobileSafetyBench</a>
+                        <th style="width: 73%"><a href="https://mobilesafetybench.github.io/" target="_blank">MobileSafetyBench</a>
                         </th>
-                        <th><a href="https://github.com/osu-nlp-group/eia_against_webagent" target="_blank">EIA</a>
+                        <th style="width: 33%"><a href="https://github.com/osu-nlp-group/eia_against_webagent" target="_blank">EIA</a>
                         </th>
-                        <th><a href="https://arxiv.org/pdf/2504.18575" target="_blank">WASP</a>
+                        <th style="width: 33%"><a href="https://arxiv.org/pdf/2504.18575" target="_blank">WASP</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/ChenWu98/agent-attack" target="_blank">VisualWebArena-Adv</a>
+                        <th style="width: 73%"><a href="https://github.com/ChenWu98/agent-attack" target="_blank">VisualWebArena-Adv</a>
                         </th>
-                        <th class="wide"><a href="https://github.com/SALT-NLP/PopupAttack" target="_blank">Attacking Popup</a>
+                        <th style="width: 73%"><a href="https://github.com/SALT-NLP/PopupAttack" target="_blank">Attacking Popup</a>
                         </th>
 
                       </tr>
