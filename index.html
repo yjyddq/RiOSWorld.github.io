@@ -80,6 +80,44 @@
       width: 80px;
       height: 60px;
     }
+    
+    /* Experiments Table Styles */
+    .experiments-table {
+      font-size: 0.9em;
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    
+    .experiments-table th, .experiments-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    .experiments-table th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+    
+    .experiments-table .model-name {
+      text-align: left;
+      font-weight: 500;
+    }
+    
+    .experiments-table .average-row {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+    
+    .risk-high { background-color: #ffebee; }
+    .risk-medium { background-color: #fff3e0; }
+    .risk-low { background-color: #e8f5e8; }
+    
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,7 +129,7 @@
 
 <body>
 
-  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -112,19 +150,19 @@
             More Research
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://yale-lily.github.io/spider">
-              Spider
+            <a class="navbar-item" href="https://os-world.github.io/">
+              OSWorld
             </a>
-            <a class="navbar-item" href="https://github.com/HKUNLP/UnifiedSKG">
-              UnifiedSKG
+            <a class="navbar-item" href="https://github.com/SALT-NLP/PopupAttack">
+              PopupAttack
             </a>
-            <a class="navbar-item" href="https://github.com/Yushi-Hu/IC-DST">
-              IC-DST
+            <a class="navbar-item" href="https://safearena.github.io/">
+              SafeArena
             </a>
-            <a class="navbar-item" href="https://github.com/HKUNLP/icl-selective-annotation">
-              Selective Annotation
+            <a class="navbar-item" href="https://arxiv.org/pdf/2504.18575?">
+              WASP
             </a>
-            <a class="navbar-item" href="https://lm-code-binder.github.io/">
+            <!-- <a class="navbar-item" href="https://lm-code-binder.github.io/">
               Binder
             </a>
             <a class="navbar-item" href="https://ds1000-code-gen.github.io/">
@@ -150,14 +188,14 @@
             </a>
             <a class="navbar-item" href="https://spider2-v.github.io/">
               Spider2-V
-            </a>
+            </a> -->
 
           </div>
         </div>
       </div>
 
     </div>
-  </nav> -->
+  </nav>
 
 
   <section class="hero">
@@ -289,11 +327,8 @@
         <img src="static/images/benchmark.png" width="100%" alt="riosworld task_demonstration"
           class="responsive-image">
         <md-block>
-          **Upper section** indicates the risk category and illustrates several triggering risks, with environmental risks 
-          shown on the left and user-originated risks on the right. \textbf{Lower section} depicts our evaluation pipeline. 
-          **RiOSWorld** supports dynamic threat deployments (e.g., phishing email, pop-ups/Ads and reCAPTCHA, etc.). 
-          We employ: 1) a rule-based evaluator to evaluate the risk goal completion, 
-          and 2) an LLM-as-a-judge-based evaluator to evaluate the risk goal intention.
+          **RiOSWorld** is a comprehensive, scalable, and real-world benchmark for evaluating the safety of multimodal computer-use agents based on Virtual Machine, supporting task set-up, both static and dynamic threat deployment, rule-based and LLM-as-a-judge-based evaluation.
+           RiOSworld contains 492 risky tasks with comprehensive risky scenarios(e.g., example risky scenarios shown in the figure). 
         </md-block>
       </div>
       <!--/ Main Figure. -->
@@ -359,31 +394,28 @@
       <md-block>
         Below we present an overview of the main statistics of **RiOSWorld**, showcasing the outline and a broad spectrum
         of tasks. **RiOSWorld** contains a total of 492 risky computer-use tasks.</md-block>
-      <div class="columns is-centered">
-        <div class="column" style="margin-right: -5rem;">
+      <div class="columns is-centered is-variable is-1">
+        <div class="column is-half">
           <div class="content has-text-centered">
-
-            <p> <br />
-              <br />
             <h5>
               Risk statistics in 
               <b>RiOSWorld</b>.<br />
             </h5>
-            Static or Dynamic, which represents whether the threat can be dynamically deployed.<br />
-            </p>
-            <img src="static/images/statistics.png" alt="data-overview" style="max-width: 65%;" />
-
+            <p>Static or Dynamic, which represents whether the threat can be dynamically deployed.</p>
+            <img src="static/images/statistics.png" alt="data-overview" style="max-width: 90%;" />
           </div>
         </div>
-        <div class="column">
+        <div class="column is-half">
           <div class="content has-text-centered">
-            <img src="static/images/pie_chart.png" alt="data-composition" style="max-width: 65%;" />
+            <img src="static/images/pie_chart.png" alt="data-composition" style="max-width: 90%;" />
             <p>
-              Fine-grained distribution of risky tasks.
+              Fine-grained distribution of risky tasks in **RiOSWorld**.
+              based on risk source and task types to show the comprehensive distribution of risky tasks.
             </p>
           </div>
         </div>
       </div>
+      
       <md-block>Comparison of different studies on computer-use agents risk evaluation. # Number of
         Risky Example: Number of risky examples. Environment Platform: The simulation environment.
         Online Rule-based Eval.?: Whether support online rule-based evaluation. Multi-modal Support?:
@@ -397,42 +429,40 @@
               <thead>
                 <tr>
                   <th style="border: 0">&nbsp;</th>
-                  <th style="vertical-align: middle" rowspan="1">OSWorld</th>
+                  <th style="vertical-align: middle" rowspan="1">RiOSWorld</th>
                 </tr>
 
               </thead>
               <tr>
-                <td style="font-weight: bold"># Instances <br>(# Templates)</td>
-                <td style="text-align: center;">369</td>
+                <td style="font-weight: bold"># Number of <br>(Risky Example)</td>
+                <td style="text-align: center;">492</td>
               </tr>
               <tr>
-                <td style="font-weight: bold">Control. <br>Exec. Env.</td>
-                <td style="text-align: center;">Computer</td>
+                <td style="font-weight: bold">Environment <br>Platform</td>
+                <td style="text-align: center;">Virtual Machine</td>
               </tr>
               <tr>
-                <td style="font-weight: bold">Environment Scalability?</td>
+                <td style="font-weight: bold">Online Rule-based Eval.?</td>
                 <td style="text-align: center;">✔️</td>
               </tr>
               <tr>
-                <td style="font-weight: bold">Multimodal <br>
-                  Support?</td>
+                <td style="font-weight: bold">Multi-modal <br>Support?</td>
                 <td style="text-align: center;">✔️</td>
               </tr>
               <tr>
-                <td style="font-weight: bold">Cross-App?</td>
+                <td style="font-weight: bold">Real Network <br>Accessible?</td>
                 <td style="text-align: center;">✔️</td>
               </tr>
               <tr>
-                <td style="font-weight: bold">Intermediate<br>
-                  Init. State?</td>
+                <td style="font-weight: bold">Dynamic Threat<br>Support?</td>
                 <td style="text-align: center;">
                   ✔️
                 </td>
               </tr>
               <tr>
-                <td style="font-weight: bold"># Exec.-based<br> Eval. Func.</td>
+                <td style="font-weight: bold"># Categories of<br>Safety Risk</td>
                 <td style="text-align: center;">
-                  134
+                  13
                 </td>
               </tr>
             </table>
@@ -446,80 +476,76 @@
                     style="margin: 0 auto; background-color: rgba(0,0,0,0); width:600px; text-align: center;">
                     <thead style="text-align: center;">
                       <tr>
-                        <th style="width: 33%"><a href="https://huggingface.co/gaia-benchmark" target="_blank">GAIA</a>
+                        <th style="width: 33%"><a href="https://github.com/ryoungj/toolemu?tab=readme-ov-file" target="_blank">ToolEmu</a>
                         </th>
-                        <th style="width: 33%"><a href="https://osu-nlp-group.github.io/Mind2Web/"
-                            target="_blank">Mind2Web</a>
+                        <th style="width: 33%"><a href="https://github.com/uiuc-kang-lab/InjecAgent" target="_blank">InjecAgent</a>
                         </th>
-                        <th style="width: 33%"><a href="https://mcgill-nlp.github.io/weblinx/"
-                            target="_blank">WebLINX</a>
+                        <th style="width: 33%"><a href="https://github.com/Junjie-Ye/ToolSword" target="_blank">ToolSword</a>
                         </th>
-                        <th style="width: 33%"><a
-                            href="https://github.com/google-research/google-research/tree/master/seq2act"
-                            target="_blank">PixelHelp</a>
+                        <th style="width: 33%"><a href="https://github.com/Lordog/R-Judge" target="_blank">R-Judge</a>
                         </th>
-                        <th style="width: 33%"><a href="https://x-lance.github.io/META-GUI-Leaderboard/"
-                            target="_blank">MetaGUI</a>
+                        <th style="width: 33%"><a href="https://huggingface.co/datasets/ai-safety-institute/AgentHarm" target="_blank">AgentHarm</a>
                         </th>
-                        <th style="width: 33%"><a
-                            href="https://github.com/google-research/google-research/tree/master/android_in_the_wild"
-                            target="_blank">AitW</a>
+                        <th style="width: 33%"><a href="https://github.com/agiresearch/ASB" target="_blank">ASB</a>
                         </th>
-                        <th style="width: 33%"><a href="https://huggingface.co/datasets/Writer/omniact"
-                            target="_blank">OmniAct</a>
+                        <th style="width: 33%"><a href="https://github.com/thu-coai/Agent-SafetyBench/" target="_blank">Agent-SafetyBench</a>
                         </th>
-                        <th style="width: 33%"><a href="https://github.com/niuzaisheng/ScreenAgent"
-                            target="_blank">ScreenAgent</a>
+                        <th style="width: 33%"><a href="https://agentdojo.spylab.ai/" target="_blank">AgentDojo</a>
                         </th>
-                        <th style="width: 33%"><a href="https://llmbench.ai/agent" target="_blank">AgentBench</a>
+                        <th style="width: 33%"><a href="https://github.com/xbmxb/EnvDistraction" target="_blank">Env. Distraction</a>
                         </th>
-                        <th style="width: 33%"><a href="https://intercode-benchmark.github.io/"
-                            target="_blank">InterCode</a>
+                        <th style="width: 33%"><a href="https://safearena.github.io/" target="_blank">SafeArena</a>
                         </th>
-
-                        <th style="width: 33%"><a href="https://miniwob.farama.org/" target="_blank">MiniWoB++</a>
+                        <th style="width: 33%"><a href="https://github.com/segev-shlomov/ST-WebAgentBench" target="_blank">ST-WebAgentBench</a>
                         </th>
-                        <th style="width: 33%"><a href="https://webshop-pnlp.github.io/" target="_blank">WebShop</a>
+                        <th style="width: 33%"><a href="https://mobilesafetybench.github.io/" target="_blank">MobileSafetyBench</a>
                         </th>
-
-                        <th style="width: 33%"><a href="https://webarena.dev/" target="_blank">WebArena</a>
+                        <th style="width: 33%"><a href="https://github.com/osu-nlp-group/eia_against_webagent" target="_blank">EIA</a>
                         </th>
-                        <th style="width: 33%"><a href="https://jykoh.com/vwa" target="_blank">VisualWebArena</a>
+                        <th style="width: 33%"><a href="https://arxiv.org/pdf/2504.18575" target="_blank">WASP</a>
                         </th>
-
-                        <th style="width: 33%"><a href="https://servicenow.github.io/WorkArena/"
-                            target="_blank">WorkArena</a>
+                        <th style="width: 33%"><a href="https://github.com/ChenWu98/agent-attack" target="_blank">VisualWebArena-Adv</a>
                         </th>
-
-                        <th style="width: 33%"><a href="https://github.com/X-LANCE/Mobile-Env"
-                            target="_blank">WikiHow</a>
-                        </th>
-
-                        <th style="width: 33%"><a href="https://github.com/showlab/assistgui"
-                            target="_blank">AssistGUI</a>
+                        <th style="width: 33%"><a href="https://github.com/SALT-NLP/PopupAttack" target="_blank">Attacking Popup</a>
                         </th>
 
                       </tr>
                     </thead>
                     <tr>
-                      <td>466<br>&nbsp;</td>
-                      <td>2350</td>
-                      <td>2337</td>
-                      <td>187</td>
-                      <td>1125</td>
-                      <td>30k</td>
-                      <td>9802</td>
-                      <td>70</td>
-                      <td>1091</td>
-                      <td>1350(3)</td>
-
-                      <td>125</td>
-                      <td>12k(1)</td>
-                      <td>812(241)</td>
-                      <td>910(314)</td>
-                      <td>23k(29)</td>
-                      <td>150(16)</td>
-                      <td>100</td>
+                      <td>144</td>
+                      <td>1054</td>
+                      <td>440</td>
+                      <td>569</td>
+                      <td>110</td>
+                      <td>400</td>
+                      <td>2000</td>
+                      <td>629</td>
+                      <td>1198</td>
+                      <td>250</td>
+                      <td>234</td>
+                      <td>80</td>
+                      <td>177</td>
+                      <td>84</td>
+                      <td>200</td>
+                      <td>122</td>
+                    </tr>
+                    <tr>
+                      <td>LM Emulator</td>
+                      <td>QA Format</td>
+                      <td>QA Format</td>
+                      <td>QA Format</td>
+                      <td>Inspect</td>
+                      <td>QA Format</td>
+                      <td>QA Format</td>
+                      <td>Code Emulator</td>
+                      <td>QA Format</td>
+                      <td>BrowserGym</td>
+                      <td>BrowserGym</td>
+                      <td>Android Emulator</td>
+                      <td>Mind2Web</td>
+                      <td>BrowserGym</td>
+                      <td>BrowserGym</td>
+                      <td>Virtual Machine</td>
                     </tr>
                     <tr>
                       <td>❌</td>
@@ -529,52 +555,12 @@
                       <td>❌</td>
                       <td>❌</td>
                       <td>❌</td>
-                      <td>❌</td>
-                      <td>Multi-isolated</td>
-                      <td>Code</td>
-                      <td>Web</td>
-                      <td>Web</td>
-                      <td>Web</td>
-                      <td>Web</td>
-                      <td>Web</td>
-                      <td>Mobile</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>❌<br>&nbsp;</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>❌<br>&nbsp;</td>
-
                       <td>✔️</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
+                      <td>❌</td>
                       <td>✔️</td>
                       <td>✔️</td>
                       <td>✔️</td>
                       <td>❌</td>
-                      <td>❌</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
                       <td>✔️</td>
                       <td>✔️</td>
                       <td>✔️</td>
@@ -588,25 +574,21 @@
                       <td>❌</td>
                       <td>❌</td>
                       <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
+                      <td>✔️</td>
                     </tr>
                     <tr>
                       <td>❌</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
-                      <td>❌<br>&nbsp;</td>
                       <td>❌</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
-                      <td>✔️</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
                       <td>❌</td>
                       <td>❌</td>
                       <td>❌</td>
@@ -614,32 +596,49 @@
                       <td>❌</td>
                       <td>❌</td>
                       <td>✔️</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>✔️</td>
+                    </tr>
+                    <tr>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
                       <td>❌</td>
                       <td>✔️</td>
 
 
                     </tr>
                     <tr>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>7</td>
-                      <td>3</td>
-
-                      <td>125</td>
-                      <td>1</td>
-
-                      <td>5</td>
+                      <td>9</td>
                       <td>6</td>
-                      <td>7</td>
-                      <td>16</td>
-
-                      <td>2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>11</td>
+                      <td>10</td>
+                      <td>8</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>5</td>
+                      <td>3</td>
+                      <td>5</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>13</td>
 
                     </tr>
                   </table>
@@ -669,700 +668,352 @@
     </div>
   </section>
 
-  <!-- <section>
+  <section class="section">
     <div class="container is-max-desktop">
-
-      <h2 class="title is-3">Benchmark</h2>
-      <md-block>We adopt state-of-the-art LLM and VLM from open-source representatives such as UI-TARS, Agent-S, Qwen, Mixtral and
-        CogAgent, and closed-source ones from Operator, GPT, Gemini, and Claude families on **OSWorld**, as LLM and VLM agent
-        baselines. We also explore methods such as the Set-of-Marks aided
-        approach, which has been demonstrated to improve spatial capabilities for visual
-        reasoning.
-        **We are actively updating the benchmark with new LLMs, VLMs and methods. Pull requests welcomed!**
-      </md-block> -->
-      <!-- Progress Chart -->
-      <!-- <div class="content has-text-justified">
-        <div style="width: 100%; margin-top: 20px;">
-          <canvas id="progressChart"></canvas>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.1/dist/chartjs-adapter-moment.min.js"></script>
-        <script>
-          async function createProgressChart() {
-            try {
-              const response = await fetch('static/data/benchmark_data.xlsx');
-              const arrayBuffer = await response.arrayBuffer();
-              const data = new Uint8Array(arrayBuffer);
-              const workbook = XLSX.read(data, {type: 'array'});
-              
-              const worksheet = workbook.Sheets['Screenshot'];
-              const jsonData = XLSX.utils.sheet_to_json(worksheet);
-              
-              // 处理数据
-              const chartData = {
-                labels: [],
-                datasets: []
-              };
-              
-              // 找出最高分数
-              let highestScore = -1;
-              let highestScoreModel = null;
-              let highestScoreDate = null;
-              
-              jsonData.forEach(row => {
-                const score = parseFloat(row.Score);
-                if (!isNaN(score) && score > highestScore) {
-                  highestScore = score;
-                  highestScoreModel = row.Model;
-                  highestScoreDate = row.Date;
-                }
-              });
-              
-              // 创建模型分组
-              const modelGroups = {};
-              jsonData.forEach(row => {
-                const date = moment(row.Date).format('YYYY-MM-DD');
-                const model = row.Model;
-                const score = parseFloat(row.Score);
-                
-                if (!modelGroups[model]) {
-                  modelGroups[model] = {
-                    label: model,
-                    data: [],
-                    borderColor: getRandomColor(),
-                    fill: false,
-                    showLine: false,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                  };
-                }
-                
-                // Add data point
-                modelGroups[model].data.push({
-                  x: date,
-                  y: score
-                });
-              });
-              
-              // Add model data to datasets and sort by date
-              chartData.datasets = Object.values(modelGroups).map(dataset => {
-                dataset.data.sort((a, b) => moment(a.x).valueOf() - moment(b.x).valueOf());
-                return dataset;
-              });
-              
-              // 按时间收集每个时间点的最高分
-              const timePointsMap = {};
-              jsonData.forEach(row => {
-                const date = moment(row.Date).format('YYYY-MM-DD');
-                const score = parseFloat(row.Score);
-                
-                if (!timePointsMap[date] || timePointsMap[date] < score) {
-                  timePointsMap[date] = score;
-                }
-              });
-              
-              // 创建最高分线的数据点，只保留历史最高值（不下降）
-              const timePoints = Object.keys(timePointsMap).sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
-              const highestScoreLineData = [];
-              let historicalHighest = 0;
-              
-              timePoints.forEach(date => {
-                const currentScore = timePointsMap[date];
-                
-                // 只有当前分数高于历史最高分时才更新历史最高分
-                if (currentScore > historicalHighest) {
-                  historicalHighest = currentScore;
-                  
-                  // 添加一个数据点到趋势线
-                  highestScoreLineData.push({
-                    x: date,
-                    y: historicalHighest
-                  });
-                } else if (highestScoreLineData.length > 0) {
-                  // 如果不是更高的分数，而且已经有数据点，则添加与历史最高分相同的值
-                  // 这样可以绘制水平线表示保持最高分
-                  highestScoreLineData.push({
-                    x: date,
-                    y: historicalHighest
-                  });
-                }
-              });
-              
-              // 添加最高分线数据集
-              chartData.datasets.push({
-                label: 'Highest Score Line',
-                data: highestScoreLineData,
-                borderColor: 'gold',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
-                borderWidth: 2,
-                fill: false,
-                pointRadius: 0,
-                showLine: true,
-                tension: 0.1,
-                z: 10
-              });
-              
-              // Calculate exponential trend line data
-              const allPoints = [];
-              jsonData.forEach(row => {
-                const date = moment(row.Date).valueOf();
-                const score = parseFloat(row.Score);
-                if (!isNaN(date) && !isNaN(score) && score > 0) { // 避免取对数时出现问题
-                  allPoints.push({ x: date, y: score });
-                }
-              });
-              
-              // Sort by date
-              allPoints.sort((a, b) => a.x - b.x);
-              
-              // 为了便于计算，将日期归一化到更小的范围
-              const minX = allPoints[0].x;
-              const normalizedPoints = allPoints.map(p => ({
-                x: (p.x - minX) / (24 * 60 * 60 * 1000 * 30), // 转换为大约的月数
-                y: p.y
-              }));
-              
-              // 使用指数回归 y = a * e^(bx)
-              // 取对数转换 ln(y) = ln(a) + bx
-              const lnPoints = normalizedPoints.map(p => ({
-                x: p.x,
-                lny: Math.log(p.y)
-              }));
-              
-              // 计算线性回归 ln(y) = ln(a) + bx
-              const n = lnPoints.length;
-              const sumX = lnPoints.reduce((sum, point) => sum + point.x, 0);
-              const sumLnY = lnPoints.reduce((sum, point) => sum + point.lny, 0);
-              const sumXLnY = lnPoints.reduce((sum, point) => sum + point.x * point.lny, 0);
-              const sumXX = lnPoints.reduce((sum, point) => sum + point.x * point.x, 0);
-              
-              const b = (n * sumXLnY - sumX * sumLnY) / (n * sumXX - sumX * sumX);
-              const lnA = (sumLnY - b * sumX) / n;
-              const a = Math.exp(lnA);
-              
-              // 创建指数趋势线数据点
-              const trendlineData = [];
-              const steps = 30; // 使用更多点让曲线更平滑
-              
-              for (let i = 0; i <= steps; i++) {
-                const normalizedX = i * (normalizedPoints[normalizedPoints.length-1].x - normalizedPoints[0].x) / steps + normalizedPoints[0].x;
-                const realX = normalizedX * (24 * 60 * 60 * 1000 * 30) + minX; // 转回实际日期
-                trendlineData.push({
-                  x: moment(realX).format('YYYY-MM-DD'),
-                  y: a * Math.exp(b * normalizedX) // 使用指数函数计算
-                });
-              }
-              
-              // 添加指数趋势线到数据集
-              chartData.datasets.push({
-                label: 'Exponential Trend',
-                data: trendlineData,
-                borderColor: '#FF0000',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0,
-                showLine: true,
-                tension: 0
-              });
-              
-              // Create chart
-              const ctx = document.getElementById('progressChart').getContext('2d');
-              const chart = new Chart(ctx, {
-                type: 'line',
-                data: chartData,
-                options: {
-                  responsive: true,
-                  plugins: {
-                    title: {
-                      display: true,
-                      text: 'Progress History (Screenshot)',
-                      font: {
-                        size: 16
-                      }
-                    },
-                    legend: {
-                      position: 'right'
-                    },
-                    tooltip: {
-                      callbacks: {
-                        title: function(context) {
-                          return moment(context[0].raw.x).format('YYYY-MM-DD');
-                        }
-                      }
-                    }
-                  },
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      min: 0,
-                      title: {
-                        display: true,
-                        text: 'OSWorld Success Rate (%)'
-                      },
-                      max: 50
-                    },
-                    x: {
-                      type: 'time',
-                      time: {
-                        unit: 'month',
-                        displayFormats: {
-                          month: 'yyyy-MM'
-                        }
-                      },
-                      title: {
-                        display: true,
-                        text: 'Date'
-                      }
-                    }
-                  }
-                }
-              });
-              
-            } catch (error) {
-              console.error('Error creating progress chart:', error);
-            }
-          }
-
-          function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-              color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-          }
-
-          document.addEventListener('DOMContentLoaded', () => {
-            if (typeof XLSX === 'undefined') {
-              const script = document.createElement('script');
-              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-              script.onload = createProgressChart;
-              document.head.appendChild(script);
-            } else {
-              createProgressChart();
-            }
-          });
-        </script>
-      </div> -->
-      <!-- End Progress Chart -->
-    <!-- </div>
-    <div class="cover" id="contentCover">
-        <div class="container-t">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="infoCard">
-                <div class="infoBody">
-                  <div class="tabs is-centered example_lst">
-                    <ul>
-                      <li class="is-active"><a title="Screenshot">Screenshot</a></li>
-                      <li><a title="A11y tree">A11y tree</a></li>
-                      <li><a title="Screenshot + A11y tree">Screenshot + A11y tree</a></li>
-                      <li><a title="Set-of-Mark">Set-of-Mark</a></li>
-                      <li><a title="Verified">Verified</a></li>
-                    </ul>
-                  </div> -->
-                  
-                  <!-- SheetJS -->
-                  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-                  
-                  <script>
-                    async function loadAndRenderExcelData() {
-                      try {
-                        const response = await fetch('static/data/benchmark_data.xlsx');
-                        const arrayBuffer = await response.arrayBuffer();
-                        const data = new Uint8Array(arrayBuffer);
-                        const workbook = XLSX.read(data, { type: 'array' });
-                        
-                        const sheetMap = {
-                          'Screenshot': 'BoardPanel2',
-                          'A11y_tree': 'BoardPanel1',
-                          'Screenshot_A11y_tree': 'BoardPanel3',
-                          'Set-of-Mark': 'BoardPanel4',
-                          'Verified': 'BoardPanel5'
-                        };
-                        
-                        Object.entries(sheetMap).forEach(([sheetName, containerId]) => {
-                          const worksheet = workbook.Sheets[sheetName];
-                          if (worksheet) {
-                            const jsonData = XLSX.utils.sheet_to_json(worksheet);
-                            renderTable(sheetName, jsonData, containerId);
-                          }
-                        });
-                        
-                        initTabSwitching();
-                        
-                      } catch (error) {
-                        console.error('Error loading Excel data:', error);
-
-                        document.querySelectorAll('.lib_examples').forEach(container => {
-                          container.innerHTML = '<p>Error loading benchmark data. Please try again later.</p>';
-                        });
-                      }
-                    }
-
-                    function renderTable(title, tableData, containerId) {
-                      const container = document.getElementById(containerId);
-                      if (!container) return;
-                      
-                      let tableHTML = `
-                        <md-block>
-                          We are continuously collecting trajectories from models that achieve scores on OSWorld to facilitate analysis by the community.
-                          For the convenience of research and verification, some trajectories submitted by the experimenters running OSWorld are placed at <a href="https://drive.google.com/drive/folders/1XtGJe3NYbceLh58qHqXId81_d5rwFLwQ" target="_blank">here</a>.
-                        </md-block>
-                        <table class="table performanceTable">
-                          <tr>
-                            <th>Rank</th>
-                            <th>Model</th>
-                            <th>Score</th>
-                          </tr>
-                      `;
-                      
-                      // Rank by order in the table
-                      tableData.forEach((row, index) => {
-                        const rank = index + 1;
-                        const isFirstRank = rank === 1;
-                        
-                        // 检查 TrajectoryLink 是否是有效的链接
-                        const isValidLink = row.TrajectoryLink && (
-                          row.TrajectoryLink.startsWith('http://') || 
-                          row.TrajectoryLink.startsWith('https://') ||
-                          row.TrajectoryLink.startsWith('www.')
-                        );
-                        
-                        tableHTML += `
-                          <tr ${isFirstRank ? 'class="first-rank-row"' : ''}>
-                            <td>
-                              <p>${isFirstRank ? `${rank} <span class="first-rank-star">*</span>` : rank}</p>
-                              <span class="date label label-default">${row.Date || ''}</span>
-                            </td>
-                            <td style="word-break:break-word;">
-                              ${row.Model || ''}
-                              <p class="institution">${row.Institution || ''}</p>
-                              ${row.PaperLink ? `<a class="link" href="${row.PaperLink}" target="_blank">${row.PaperAuthors || 'Link'}</a>` : ''}
-                            </td>
-                            <td>${row.Score || ''}</td>
-                          </tr>
-                        `;
-                      });
-                      
-                      tableHTML += `</table>`;
-                      container.innerHTML = tableHTML;
-                    }
-                    
-                    function initTabSwitching() {
-                      document.querySelectorAll(".example_lst li").forEach(e => {
-                        e.addEventListener("click", function(eve) {
-                          const iTxt = eve.srcElement.innerText;
-                          for (let v of document.querySelectorAll(".example_lst a")) {
-                            if (iTxt === v.innerText) {
-                              v.parentElement.className = "is-active";
-                            } else {
-                              v.parentElement.className = "";
-                            }
-                          }
-                          for (let block of document.getElementsByClassName('lib_examples')) {
-                            block.style.display = (block.title === iTxt) ? 'block' : 'none';
-                          }
-                        });
-                      });
-                    }
-                    
-                    document.addEventListener('DOMContentLoaded', loadAndRenderExcelData);
-                  </script>
-                  
-                  <div title="A11y tree" class="lib_examples" id="BoardPanel1" style="display: none;"></div>
-                  <div title="Screenshot" class="lib_examples" id="BoardPanel2" style="display: block;"></div>
-                  <div title="Screenshot + A11y tree" class="lib_examples" id="BoardPanel3" style="display: none;"></div>
-                  <div title="Set-of-Mark" class="lib_examples" id="BoardPanel4" style="display: none;"></div>
-                  <div title="Verified" class="lib_examples" id="BoardPanel5" style="display: none;">
-                    <md-block>We will run the current state-of-the-art models under a unified setting and environment, maintained by OSWorld evaluators, and specify the version used for the run (as some tasks may change over time).</md-block>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-  </section> -->
-
-  <!-- Analysis Section -->
-  <!-- <section class="section">
-    <div class="container is-max-desktop"> -->
-      <!-- Analysis. -->
-      <!-- <h2 class="title is-3">Analysis</h2>
+      <!-- Experiments. -->
+      <h2 class="title is-3">Experiments</h2>
       <md-block>
-        We conduct a qualitative analysis in the aspect of models, methods, and human to find out factors influencing
-        the
-        performance of VLMs in digital agent tasks and their underlying behavioral logic. We investigate the impact of
-        task attributes
-        <em>(such as difficulty, feasibility, visual requirement, and GUI complexity)</em>, input measurements
-        <em>(such as screenshot resolution, the influence of trajectory history, and the effect of UI layout)</em>, and
-        explore
-        whether there are patterns in the agent's performance across different operating systems. Here is an overview of
-        our analysis outcome.
+        We evaluate the safety risks of state-of-the-art multimodal agents on **RiOSWorld** from two perspectives: 
+        **Risk Goal Intention** and **Risk Goal Completion**. Our experiments cover 10 representative models including 
+        GPT-4o, GPT-4o-mini, GPT-4.1, Gemini-2.0-pro, Gemini-2.5-pro-exp, Claude-3.5-Sonnet, Claude-3.7-Sonnet, 
+        Qwen2-VL-72B-Instruct, Qwen2.5-VL-72B-Instruct, and Llama-3.2-90B-Vision-Instruct.
       </md-block>
-      <br>
-      <div class="carousel-container-analysis">
-        <div id="findings-carousel" class="carousel-analysis">
-          <div class="carousel-item-analysis">
-            <img src="static/images/down_sampling_exp_fig.png" alt="" class="responsive-image">
-            <md-block>Higher screenshot resolution typically leads to improved performance.</md-block>
-          </div>
+      
+      <!-- Key Findings -->
+      <h3 class="title is-4">Key Findings</h3>
+      
+      <!-- Key Findings Text -->
+      <md-block>
+        <span style="color: red; font-weight: bold;">MLLMs-Based Agents are Still Far from Being Trustworthy Assistants for Autonomous Computer-Use.</span>
+        
+        The results reveal significant safety flaws in current MLLM-based agents across all risk categories in **RiOSWorld**. 
+        Our key findings include:
 
-          <div class="carousel-item-analysis">
-            <img src="static/images/traj_length_effect_fig.png" alt="" class="responsive-image">
-            <md-block>Longer text-based trajectory history context improves performance, unlike screenshot-only history,
-              but poses efficiency challenges.</md-block>
-          </div>
+        - <span style="color: red; font-weight: bold;">High Intention Risk Rates</span>: The average risk goal intention unsafe rates exceed <span style="color: red; font-weight: bold;">80%</span> across all models, 
+          with <span style="color: red; font-weight: bold;">89.12%</span> for environmental risks and <span style="color: red; font-weight: bold;">81.33%</span> for user-originated risks.
+        
+        - <span style="color: red; font-weight: bold;">High Completion Rates</span>: Risk goal completion rates are approximately <span style="color: red; font-weight: bold;">60%</span> for both categories 
+          (<span style="color: red; font-weight: bold;">60.29%</span> for environmental risks and <span style="color: red; font-weight: bold;">59.07%</span> for user-originated risks).
+        
+        - **Overall Risk Assessment**: The overall <span style="color: red; font-weight: bold;">Unsafe Rate (USR)</span> across all agents are <span style="color: red; font-weight: bold;">84.93%</span> for intention 
+          and <span style="color: red; font-weight: bold;">59.64%</span> for completion, indicating substantial safety concerns.
+        
+        - **Model-Specific Patterns**: 
+          - For environmental risks, **Gemini-2.0-pro** exhibits the highest USR for risk goal intention, 
+            while **Llama-3.2-90B-Vision-Instruct** shows the highest USR for risk goal completion.
+          - For user-originated risks, **GPT-4.1** demonstrates the highest USR for intention, 
+            and **GPT-4o-mini** has the highest USR for completion.
 
-          <div class="carousel-item-analysis">
-            <img src="static/images/disturb_effect_fig.png" alt="" class="responsive-image">
-            <md-block>Current VLM agents are not robust to UI layout and noise.</md-block>
-          </div>
+        These results indicate that current MLLM-based agents still have a significant gap from humans in safety 
+        awareness and behavior, necessitating further research in safety alignment for computer-use agents.
+      </md-block>
 
-          <div class="carousel-item-analysis">
-            <img src="static/images/cross_os_effect_fig.png" alt="" class="responsive-image">
-            <md-block>The performance of VLM agents across different OS is in strong correlation. This implies that
-              insights and
-              methodologies developed within the <strong>OSWorld</strong> framework can be effectively transferred to
-              Windows environments
-              with a high degree of reliability.
-            </md-block>
-          </div>
-
-          <div class="carousel-item-analysis">
-            <img src="static/images/success_case_fig.png" alt="" class="responsive-image">
-            <md-block>A success case of LLM/VLM agent baselines.</md-block>
-          </div>
-        </div>
-      </div> -->
-      <!--/ Analysis. -->
-    <!-- </div>
-  </section> -->
-
-  <!-- <section class="section"> -->
-    <!-- Acknowledgement. -->
-    <!-- <div class="container is-max-desktop">
+      <!-- Summary Table -->
       <div class="columns is-centered">
-        <div class="container is-max-desktop"> -->
-          <!-- Paper video. -->
-          <!-- <div class="column">
-            <h2 class="title is-3">Videos</h2>
-            <md-block>
-              Special thanks to the following YouTubers and enthusiasts for their reports. We are delighted to see the
-              community's interest. If you would like a brief video introduction and their thoughts, feel free to check
-              them out!
-            </md-block>
-            <br>
-            <div id="carousel" class="carousel-container-videos">
-              <div class="carousel-track-videos">
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/tRavLU8Ih4A?start=1300" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@Yannic Kilcher</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/hrPQS__ayu8?rel=0&amp;showinfo=0" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@Wes Roth</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/slthKMDR0uo?rel=0&amp;t=2953s;showinfo=0"
-                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@hu-po</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/gBb5cs6hj4U?start=1236"
-                        title="GPT-6 Leaks: Truth or Fiction?" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@Dylan Curious</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/zm1_Huwb26I?rel=0&amp;t=2953s;showinfo=0"
-                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@WorldofAI</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/uz1QiM0Yxw0?rel=0&amp;showinfo=0" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@Gourcer</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/KngdLKv9RAc?rel=0&amp" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@AI Explained</h3>
-                  </div>
-                </div>
-
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/DVRg0daTads?rel=0&amp;showinfo=0" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@Fireship</h3>
-                  </div>
-                </div>
-                <div class="carousel-item-videos">
-                  <div class="content">
-                    <div class="publication-video">
-                      <iframe src="https://www.youtube.com/embed/g4aWf8bxaDE?rel=0&amp;showinfo=0" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <h3 class="title is-4">@1littlecoder</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="column is-half">
+          <!-- <h4 class="title is-6 has-text-centered">Overall Unsafe Rate Summary</h4> -->
+          <table class="table experiments-table">
+            <thead>
+              <tr>
+                <th>Risk Source</th>
+                <th># Num.</th>
+                <th>USR Intention/Completion (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="model-name">Environment</td>
+                <td>254</td>
+                <td class="risk-high">89.12 / 60.29</td>
+              </tr>
+              <tr>
+                <td class="model-name">User</td>
+                <td>238</td>
+                <td class="risk-high">81.33 / 59.07</td>
+              </tr>
+              <tr class="average-row">
+                <td class="model-name">Total</td>
+                <td>492</td>
+                <td>84.93 / 59.64</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <br>
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3">Acknowledgement</h2>
 
-
-            <div class="content has-text-justified">
-              <p>
-                We thank
-
-                <a href="https://www.sidaw.xyz/">Sida Wang</a>,
-                <a href="https://www.ptshaw.com/">Peter Shaw</a>,
-                <a href="https://www.alanesuhr.com/">Alane Suhr</a>,
-                <a href="https://www.cs.washington.edu/people/faculty/lsz">Luke Zettlemoyer</a>,
-                <a href="https://github.com/FredWuCZ">Haoyuan Wu</a>,
-                <a href="https://junliwang.tech/">Junli Wang</a>,
-                <a href="https://chengyou-jia.github.io/">Chengyou Jia</a>,
-                <a href="https://x.com/junlin45300">Junlin Yang</a>,
-                <a href="https://github.com/leoozy">Junlei Zhang</a>,
-                <a href="https://chenwu.io/">Chen Henry Wu</a>,
-                <a href="https://pengcheng.in/">Pengcheng Yin</a>, <a href="https://ysymyth.github.io/">Shunyu Yao</a>,
-                <a href="https://xinghanlu.com/">Xing Han Lu</a>, <a href="https://sivareddy.in/">Siva Reddy</a>, <a
-                  href="https://www.linkedin.com/in/ruoxi-sun-84a85457/">Ruoxi Sun</a>,
-                <a href="https://zhiyuan-zeng.github.io/"> Zhiyuan Zeng</a>, and <a
-                  href="https://lilei-nlp.github.io/">Lei Li</a> for their helpful feedback on this work
-              </p>
-            </div>
-          </div> -->
-          <!--/ Acknowledgement. -->
-        <!-- </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- <section class="section"> -->
-    <!-- FAQ. -->
-    <!-- <div class="container is-max-desktop faq-container">
-      <h2 class="title is-3 faq-title">FAQ</h2>
-      <div class="faq-item">
-        <h3 class="faq-question">What is the username and password for the virtual machines?</h3>
-        <p class="faq-answer">The username and password for the virtual machines are as follows:<br>
-          - <strong>Ubuntu:</strong> <code>user</code> / <code>password</code> <br>
-          - <strong>Windows:</strong> <code>TBD</code>
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">How to setup the account and credentials for Google and Google Drive?</h3>
-        <p class="faq-answer">See <a
-            href="https://github.com/xlang-ai/OSWorld/blob/main/ACCOUNT_GUIDELINE.md#real-accounts">Account
-            Guideline</a>.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">How can I configure a proxy for the VM if I'm behind a GFW?</h3>
-        <p class="faq-answer">See <a
-            href="https://github.com/xlang-ai/OSWorld/blob/main/PROXY_GUIDELINE.md#proxy-guideline">Proxy Guideline</a>.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">What are the running times and costs under different settings?</h3>
-        <p class="faq-answer">
-        <table>
+      <!-- Main Experimental Results -->
+      <h3 class="title is-4">Main Experimental Results</h3>
+      <!-- Environmental Risks Table -->
+      <!-- <h4 class="title is-5">Environmental Risks</h4> -->
+      <md-block>
+        **Table 1:** Unsafe rates of environmental risks including Pop-ups/Ads, Phishing Web, Phishing Email, 
+        Account Fraud, reCAPTCHA, and Induced Text. The first column of each scenario represents the unsafe rate 
+        of **Risk Goal Intention**, and the second column indicates the unsafe rate of **Risk Goal Completion**.
+      </md-block>
+      
+      <div class="table-container">
+        <table class="table experiments-table">
           <thead>
             <tr>
-              <th>Setting</th>
-              <th>Expected Time*</th>
-              <th>Budget Cost (Full Test Set/Small Test Set)</th>
+              <th rowspan="2">Model</th>
+              <th colspan="12">Unsafe Rate (%)</th>
+            </tr>
+            <tr>
+              <th colspan="2">Pop-ups/Ads</th>
+              <th colspan="2">Phishing Web</th>
+              <th colspan="2">Phishing Email</th>
+              <th colspan="2">Account</th>
+              <th colspan="2">reCAPTCHA</th>
+              <th colspan="2">Induced Text</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>GPT-4V (screenshot)</td>
-              <td>10h</td>
-              <td>$100 ($10)</td>
+              <td class="model-name">GPT-4o</td>
+              <td class="risk-high">93.8</td><td class="risk-medium">68.8</td>
+              <td class="risk-high">100</td><td class="risk-high">92.2</td>
+              <td class="risk-high">100</td><td class="risk-low">38.5</td>
+              <td class="risk-high">82.1</td><td class="risk-low">15.2</td>
+              <td class="risk-medium">56.7</td><td class="risk-low">22.6</td>
+              <td class="risk-high">100</td><td class="risk-high">95.8</td>
             </tr>
             <tr>
-              <td>Gemini-ProV (screenshot)</td>
-              <td>15h</td>
-              <td>0 (0)</td>
+              <td class="model-name">GPT-4o-mini</td>
+              <td class="risk-high">94.0</td><td class="risk-medium">64.0</td>
+              <td class="risk-high">100</td><td class="risk-high">88.2</td>
+              <td class="risk-high">100</td><td class="risk-medium">56.3</td>
+              <td class="risk-medium">75.9</td><td class="risk-medium">51.5</td>
+              <td class="risk-high">87.5</td><td class="risk-low">21.9</td>
+              <td class="risk-high">100</td><td class="risk-high">100</td>
             </tr>
             <tr>
-              <td>Claude-3 Opus (screenshot)</td>
-              <td>15h</td>
-              <td>$150 ($15)</td>
+              <td class="model-name">GPT-4.1</td>
+              <td class="risk-high">96.0</td><td class="risk-low">14.0</td>
+              <td class="risk-high">100</td><td class="risk-medium">75.6</td>
+              <td class="risk-high">90.0</td><td class="risk-low">36.4</td>
+              <td class="risk-high">80.7</td><td class="risk-low">12.1</td>
+              <td class="risk-low">45.5</td><td class="risk-low">27.3</td>
+              <td class="risk-high">96.0</td><td class="risk-medium">77.1</td>
             </tr>
             <tr>
-              <td>GPT-4V (a11y tree, SoM, etc.)</td>
-              <td>30h</td>
-              <td>$500 ($50)</td>
+              <td class="model-name">Gemini-2.0-pro</td>
+              <td class="risk-high">100</td><td class="risk-low">44.0</td>
+              <td class="risk-high">97.9</td><td class="risk-high">95.8</td>
+              <td class="risk-high">96.6</td><td class="risk-low">31.3</td>
+              <td class="risk-high">100</td><td class="risk-low">21.2</td>
+              <td class="risk-high">95.8</td><td class="risk-medium">56.7</td>
+              <td class="risk-high">100</td><td class="risk-high">100</td>
+            </tr>
+            <tr>
+              <td class="model-name">Gemini-2.5-pro-exp</td>
+              <td class="risk-high">98.0</td><td class="risk-medium">65.3</td>
+              <td class="risk-high">100</td><td class="risk-high">94.2</td>
+              <td class="risk-high">93.3</td><td class="risk-low">29.6</td>
+              <td class="risk-medium">79.3</td><td class="risk-low">18.2</td>
+              <td class="risk-medium">53.3</td><td class="risk-medium">50.0</td>
+              <td class="risk-high">100</td><td class="risk-high">100</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude-3.5-Sonnet</td>
+              <td class="risk-high">93.9</td><td class="risk-medium">53.1</td>
+              <td class="risk-high">100</td><td class="risk-medium">75.5</td>
+              <td class="risk-high">87.5</td><td class="risk-medium">59.4</td>
+              <td class="risk-high">86.4</td><td class="risk-low">9.1</td>
+              <td class="risk-medium">66.7</td><td class="risk-low">28.6</td>
+              <td class="risk-high">88.6</td><td class="risk-medium">78.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude-3.7-Sonnet</td>
+              <td class="risk-high">91.8</td><td class="risk-high">83.7</td>
+              <td class="risk-high">94.2</td><td class="risk-high">88.5</td>
+              <td class="risk-high">93.8</td><td class="risk-medium">65.6</td>
+              <td class="risk-medium">62.1</td><td class="risk-low">10.3</td>
+              <td class="risk-medium">67.9</td><td class="risk-low">35.7</td>
+              <td class="risk-high">94.0</td><td class="risk-high">94.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Qwen2-VL-72B-Instruct</td>
+              <td class="risk-medium">69.4</td><td class="risk-medium">54.0</td>
+              <td class="risk-high">100</td><td class="risk-medium">77.8</td>
+              <td class="risk-high">100</td><td class="risk-low">28.1</td>
+              <td class="risk-high">100</td><td class="risk-low">15.2</td>
+              <td class="risk-high">96.3</td><td class="risk-low">22.2</td>
+              <td class="risk-medium">66.7</td><td class="risk-medium">75.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Qwen2.5-VL-72B-Instruct</td>
+              <td class="risk-high">100</td><td class="risk-medium">53.1</td>
+              <td class="risk-high">100</td><td class="risk-medium">76.5</td>
+              <td class="risk-high">96.9</td><td class="risk-low">43.8</td>
+              <td class="risk-high">100</td><td class="risk-low">15.2</td>
+              <td class="risk-high">93.3</td><td class="risk-low">40.0</td>
+              <td class="risk-medium">53.1</td><td class="risk-medium">68.8</td>
+            </tr>
+            <tr>
+              <td class="model-name">Llama-3.2-90B-Vision-Instruct</td>
+              <td class="risk-medium">66.3</td><td class="risk-medium">72.0</td>
+              <td class="risk-high">100</td><td class="risk-medium">73.2</td>
+              <td class="risk-high">100</td><td class="risk-low">21.4</td>
+              <td class="risk-high">82.8</td><td class="risk-medium">69.7</td>
+              <td class="risk-high">83.3</td><td class="risk-medium">70.0</td>
+              <td class="risk-high">100</td><td class="risk-high">100</td>
+            </tr>
+            <tr class="average-row">
+              <td class="model-name">Average</td>
+              <td>90.3</td><td>57.2</td>
+              <td>99.2</td><td>83.7</td>
+              <td>95.8</td><td>41.0</td>
+              <td>84.9</td><td>20.5</td>
+              <td>74.6</td><td>37.5</td>
+              <td>89.8</td><td>88.9</td>
             </tr>
           </tbody>
         </table>
-        <p class="faq-note">*No environment parallelism. Calculated in April 2024.</p>
-        </p>
       </div>
+
+      <!-- User Risks Table -->
+      <!-- <h4 class="title is-5">User-Originated Risks</h4> -->
+      <md-block>
+        **Table 2:** Unsafe rates of risks from users including File I/O, OS Operation, Web, Code, 
+        Social Media, Office, and Multimedia. The first column of each scenario represents the unsafe rate 
+        of **Risk Goal Intention**, and the second column indicates the unsafe rate of **Risk Goal Completion**.
+      </md-block>
+      
+      <div class="table-container">
+        <table class="table experiments-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Model</th>
+              <th colspan="14">Unsafe Rate (%)</th>
+            </tr>
+            <tr>
+              <th colspan="2">File I/O</th>
+              <th colspan="2">OS</th>
+              <th colspan="2">Web</th>
+              <th colspan="2">Code</th>
+              <th colspan="2">Social Media</th>
+              <th colspan="2">Office</th>
+              <th colspan="2">Multimedia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="model-name">GPT-4o</td>
+              <td class="risk-medium">69.6</td><td class="risk-medium">60.9</td>
+              <td class="risk-high">93.3</td><td class="risk-high">86.7</td>
+              <td class="risk-high">90.2</td><td class="risk-high">90.2</td>
+              <td class="risk-high">90.2</td><td class="risk-high">80.5</td>
+              <td class="risk-high">86.4</td><td class="risk-low">23.3</td>
+              <td class="risk-medium">71.9</td><td class="risk-high">90.5</td>
+              <td class="risk-high">100</td><td class="risk-high">96.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">GPT-4o-mini</td>
+              <td class="risk-high">91.3</td><td class="risk-medium">69.6</td>
+              <td class="risk-medium">76.7</td><td class="risk-medium">73.3</td>
+              <td class="risk-high">90.5</td><td class="risk-high">100</td>
+              <td class="risk-high">100</td><td class="risk-high">88.2</td>
+              <td class="risk-high">95.2</td><td class="risk-low">20.0</td>
+              <td class="risk-medium">72.7</td><td class="risk-high">81.0</td>
+              <td class="risk-high">98.0</td><td class="risk-high">98.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">GPT-4.1</td>
+              <td class="risk-medium">65.2</td><td class="risk-low">43.5</td>
+              <td class="risk-high">96.7</td><td class="risk-high">93.3</td>
+              <td class="risk-high">100</td><td class="risk-high">95.2</td>
+              <td class="risk-high">90.2</td><td class="risk-medium">75.0</td>
+              <td class="risk-high">95.2</td><td class="risk-low">23.3</td>
+              <td class="risk-high">100</td><td class="risk-low">19.1</td>
+              <td class="risk-high">100</td><td class="risk-low">12.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Gemini-2.0-pro</td>
+              <td class="risk-low">41.7</td><td class="risk-low">41.7</td>
+              <td class="risk-high">96.7</td><td class="risk-high">80.0</td>
+              <td class="risk-high">90.5</td><td class="risk-high">92.9</td>
+              <td class="risk-high">92.9</td><td class="risk-high">87.5</td>
+              <td class="risk-high">90.9</td><td class="risk-low">23.3</td>
+              <td class="risk-high">86.4</td><td class="risk-medium">68.4</td>
+              <td class="risk-high">100</td><td class="risk-medium">66.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Gemini-2.5-pro-exp</td>
+              <td class="risk-low">30.4</td><td class="risk-low">30.4</td>
+              <td class="risk-high">96.7</td><td class="risk-high">83.3</td>
+              <td class="risk-high">100</td><td class="risk-high">100</td>
+              <td class="risk-high">87.8</td><td class="risk-medium">70.7</td>
+              <td class="risk-high">90.5</td><td class="risk-low">30.0</td>
+              <td class="risk-high">95.5</td><td class="risk-medium">71.4</td>
+              <td class="risk-high">100</td><td class="risk-medium">66.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude-3.5-Sonnet</td>
+              <td class="risk-low">30.4</td><td class="risk-low">30.4</td>
+              <td class="risk-high">86.7</td><td class="risk-high">83.3</td>
+              <td class="risk-high">90.5</td><td class="risk-medium">73.8</td>
+              <td class="risk-high">92.7</td><td class="risk-high">86.3</td>
+              <td class="risk-high">81.8</td><td class="risk-low">30.0</td>
+              <td class="risk-low">36.4</td><td class="risk-low">9.1</td>
+              <td class="risk-low">46.0</td><td class="risk-low">34.0</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude-3.7-Sonnet</td>
+              <td class="risk-low">34.8</td><td class="risk-low">34.8</td>
+              <td class="risk-high">93.3</td><td class="risk-high">87.1</td>
+              <td class="risk-high">100</td><td class="risk-high">92.9</td>
+              <td class="risk-high">92.7</td><td class="risk-high">92.7</td>
+              <td class="risk-high">95.2</td><td class="risk-low">23.3</td>
+              <td class="risk-medium">62.5</td><td class="risk-medium">52.4</td>
+              <td class="risk-high">98.0</td><td class="risk-medium">75.6</td>
+            </tr>
+            <tr>
+              <td class="model-name">Qwen2-VL-72B-Instruct</td>
+              <td class="risk-low">13.0</td><td class="risk-low">13.0</td>
+              <td class="risk-high">93.3</td><td class="risk-high">83.3</td>
+              <td class="risk-high">100</td><td class="risk-medium">57.1</td>
+              <td class="risk-high">100</td><td class="risk-medium">73.2</td>
+              <td class="risk-medium">61.9</td><td class="risk-low">13.3</td>
+              <td class="risk-high">90.5</td><td class="risk-high">81.0</td>
+              <td class="risk-high">100</td><td class="risk-low">18.4</td>
+            </tr>
+            <tr>
+              <td class="model-name">Qwen2.5-VL-72B-Instruct</td>
+              <td class="risk-low">30.4</td><td class="risk-low">4.6</td>
+              <td class="risk-high">90.0</td><td class="risk-high">86.7</td>
+              <td class="risk-high">100</td><td class="risk-medium">66.7</td>
+              <td class="risk-high">100</td><td class="risk-medium">65.9</td>
+              <td class="risk-high">100</td><td class="risk-low">13.3</td>
+              <td class="risk-low">4.5</td><td class="risk-low">4.5</td>
+              <td class="risk-high">100</td><td class="risk-low">10.2</td>
+            </tr>
+            <tr>
+              <td class="model-name">Llama-3.2-90B-Vision-Instruct</td>
+              <td class="risk-low">4.4</td><td class="risk-low">4.4</td>
+              <td class="risk-high">90.0</td><td class="risk-high">83.3</td>
+              <td class="risk-high">95.2</td><td class="risk-high">97.6</td>
+              <td class="risk-high">100</td><td class="risk-high">97.6</td>
+              <td class="risk-high">80.0</td><td class="risk-low">15.4</td>
+              <td class="risk-high">95.5</td><td class="risk-medium">66.7</td>
+              <td class="risk-low">30.0</td><td class="risk-low">28.0</td>
+            </tr>
+            <tr class="average-row">
+              <td class="model-name">Average</td>
+              <td>41.1</td><td>33.3</td>
+              <td>91.3</td><td>84.0</td>
+              <td>95.7</td><td>86.6</td>
+              <td>94.7</td><td>81.8</td>
+              <td>87.7</td><td>21.5</td>
+              <td>71.6</td><td>54.4</td>
+              <td>87.2</td><td>50.4</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--/ Experiments. -->
     </div>
-  </section> -->
-
-
-  <!-- <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{OSWorld,
-      title={OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments},
-      author={Tianbao Xie and Danyang Zhang and Jixuan Chen and Xiaochuan Li and Siheng Zhao and Ruisheng Cao and Toh Jing Hua and Zhoujun Cheng and Dongchan Shin and Fangyu Lei and Yitao Liu and Yiheng Xu and Shuyan Zhou and Silvio Savarese and Caiming Xiong and Victor Zhong and Tao Yu},
-      year={2024},
-      eprint={2404.07972},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI}
-}</code></pre>
-    </div>
-  </section> -->
-
+  </section>
 
   <footer class="footer">
     <div class="container">
