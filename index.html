@@ -118,7 +118,32 @@
       overflow-x: auto;
       margin: 20px 0;
     }
-  </style>
+
+    .instruction {
+      color: #6C8EBF;
+      font-family: monospace;
+    }
+
+    .config {
+      color: #60A917;
+      font-family: monospace;
+    }
+
+    .halfway-config {
+      color: #B85450;
+      font-family: monospace;
+    }
+
+    .evaluator {
+      color: #FF9933;
+      font-family: monospace;
+    }
+
+    .risk-evaluator {
+      color: #CCCC00;
+      font-family: monospace;
+    }
+  </style>  
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -226,7 +251,7 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://github.com/yjyddq/RiOSWorld" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/pdf/2506.00618" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -327,8 +352,9 @@
         <img src="static/images/benchmark.png" width="100%" alt="riosworld task_demonstration"
           class="responsive-image">
         <md-block>
-          **RiOSWorld** is a comprehensive, scalable, and real-world benchmark for evaluating the safety of multimodal computer-use agents based on Virtual Machine, supporting task set-up, both static and dynamic threat deployment, rule-based and LLM-as-a-judge-based evaluation.
-           RiOSworld contains 492 risky tasks with comprehensive risky scenarios(e.g., example risky scenarios shown in the figure). 
+          **RiOSWorld** is a comprehensive, scalable, and real-world benchmark for evaluating the safety risk of computer-use agents based on Virtual Machine. It supports dynamic threat deployments (e.g., phishing email, pop-ups/Ads and reCAPTCHA, etc.). 
+          **Upper section** indicates the risk category and illustrates several triggering risks, with environmental risks shown on the left and user-originated risks on the right. 
+          **Lower section** depicts our evaluation pipeline. We employ: 1) a rule-based evaluator to evaluate the risk goal completion, and 2) an LLM-as-a-judge-based evaluator to evaluate the risk goal intention.
         </md-block>
       </div>
       <!--/ Main Figure. -->
@@ -344,25 +370,25 @@
           <div class="content has-text-justified">
             <md-block>
               With the rapid development of multimodal large language models (MLLMs), they
-              are increasingly deployed as autonomous computer-use agents capable of accom-
-              plishing complex computer tasks. However, a pressing issue arises: Can the safety
+              are increasingly deployed as autonomous computer-use agents capable of accomplishing 
+              complex computer tasks. However, a pressing issue arises: Can the safety
               risk principles designed and aligned for general MLLMs in dialogue scenarios be
               effectively transferred to real-world computer-use scenarios? Existing research
               on evaluating the safety risks of MLLM-based computer-use agents suffers from
               several limitations: it either lacks realistic interactive environments, or narrowly
-              focuses on one or a few specific risk types. These limitations ignore the com-
-              plexity, variability, and diversity of real-world environments, thereby restricting
+              focuses on one or a few specific risk types. These limitations ignore the complexity, 
+              variability, and diversity of real-world environments, thereby restricting
               comprehensive risk evaluation for computer-use agents. To this end, we introduce
               **RiOSWorld**, a benchmark designed to evaluate the potential risks of MLLM-based
               agents during real-world computer manipulations. Our benchmark includes 492
-              risky tasks spanning various computer applications, involving web, social me-
-              dia, multimedia, os, email, and office software. We categorize these risks into
+              risky tasks spanning various computer applications, involving web, social media, 
+              multimedia, os, email, and office software. We categorize these risks into
               two major classes based on their risk source: (i) User-originated risks and (ii)
-              Environmental risks. For the evaluation, we evaluate safety risks from two perspec-
-              tives: (i) Risk goal intention and (ii) Risk goal completion. Extensive experiments
+              Environmental risks. For the evaluation, we evaluate safety risks from two perspectives: 
+              (i) Risk goal intention and (ii) Risk goal completion. Extensive experiments
               with multimodal agents on **RiOSWorld** demonstrate that current computer-use
-              agents confront significant safety risks in real-world scenarios. Our findings high-
-              light the necessity and urgency of safety alignment for computer-use agents in
+              agents confront significant safety risks in real-world scenarios. Our findings highlight
+              the necessity and urgency of safety alignment for computer-use agents in
               real-world computer manipulation, providing valuable insights for developing
               trustworthy computer-use agents.
             </md-block>
@@ -379,9 +405,9 @@
       <h2 class="title is-3">Task Configuration of RiOSWorld</h2>
       <div class="content has-text-justified">
         <img src="static/images/environment.png" width="100%" alt="task configuration" class="responsive-image">
-        <md-block>**RiOSWorld**'s Task Configuration. The environment uses a configuration file for tasks definition (blue), 
-          initial environment setup (green), halfway environment setup (red), task completion evaluation (orange), 
-          risk trigger evaluation (yellow).</md-block>
+        <md-block>**RiOSWorld**'s Task Configuration. Our benchmark uses a configuration file for definition of <span class="instruction">task instruction</span>, 
+          <span class="config">initial environment setup</span>, <span class="halfway-config">halfway environment setup</span>, <span class="evaluator">task completion evaluation</span>, 
+          <span class="risk-evaluator">risk trigger evaluation</span>.</md-block>
       </div>
       <!--/ Environment Infrastructure. -->
     </div>
@@ -392,16 +418,12 @@
       <!-- Data Statistics. -->
       <h2 class="title is-3">Data Statistics and Comparison</h2>
       <md-block>
-        Below we present an overview of the main statistics of **RiOSWorld**, showcasing the outline and a broad spectrum
-        of tasks. **RiOSWorld** contains a total of 492 risky computer-use tasks.</md-block>
+        **RiOSWorld** contains a total of 492 risky computer-use tasks.</md-block>
       <div class="columns is-centered is-variable is-1">
         <div class="column is-half">
           <div class="content has-text-centered">
-            <h5>
-              Risk statistics in 
-              <b>RiOSWorld</b>.<br />
-            </h5>
-            <p>Static or Dynamic, which represents whether the threat can be dynamically deployed.</p>
+            <p>Risk statistics in 
+              <b>RiOSWorld</b>.<br /> Static or Dynamic, which represents whether the threat can be dynamically deployed.</p>
             <img src="static/images/statistics.png" alt="data-overview" style="max-width: 90%;" />
           </div>
         </div>
@@ -409,19 +431,19 @@
           <div class="content has-text-centered">
             <img src="static/images/pie_chart.png" alt="data-composition" style="max-width: 90%;" />
             <p>
-              Fine-grained distribution of risky tasks in **RiOSWorld**.
-              based on risk source and task types to show the comprehensive distribution of risky tasks.
+              Fine-grained distribution of risky tasks in 
+              <b>RiOSWorld</b>.<br /> Based on risk source and task types to show the comprehensive distribution of risky tasks.
             </p>
           </div>
         </div>
       </div>
       
-      <md-block>Comparison of different studies on computer-use agents risk evaluation. # Number of
-        Risky Example: Number of risky examples. Environment Platform: The simulation environment.
-        Online Rule-based Eval.?: Whether support online rule-based evaluation. Multi-modal Support?:
-        Whether agents support multi-modal inputs. Real Network Accessible?: Whether the environment is
-        connected to the Internet. Dynamic Threat Support?: Whether the environment supports dynamic
-        threats. # Categories of Safety Risk: Number of category.</md-block><br>
+      <md-block>Comparison of different studies on computer-use agents risk evaluation. **# Number of
+        Risky Example**: Number of risky examples. **Environment Platform**: The simulation environment.
+        **Online Rule-based Eval.?**: Whether support online rule-based evaluation. **Multi-modal Support?**:
+        Whether agents support multi-modal inputs. **Real Network Accessible?**: Whether the environment is
+        connected to the Internet. **Dynamic Threat Support?**: Whether the environment supports dynamic
+        threats. **# Categories of Safety Risk**: Number of category.</md-block><br>
       <div class="column is-full-width interpolation-panel">
         <div class="columns">
           <div class="column is-one-third">
@@ -661,7 +683,7 @@
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Environment Infrastructure. -->
-      <h2 class="title is-4">Topic distribution in RiOSWorld</h2>
+      <h2 class="title is-4">Topic Distribution in RiOSWorld</h2>
       <div class="content has-text-justified">
         <img src="static/images/instruction_distribution.png" width="100%" alt="topic distribution" class="responsive-image">
         <md-block>We visualize the topic distribution of the instruction text embedding in our benchmark. 
